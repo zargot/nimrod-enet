@@ -385,6 +385,10 @@ type
     packetThrottleAcceleration*: cuint
     packetThrottleDeceleration*: cuint
     packetThrottleInterval*: cuint
+    pingInterval*: cuint
+    timeoutLimit*: cuint
+    timeoutMinimum*: cuint
+    timeoutMaximum*: cuint
     lastRoundTripTime*: cuint
     lowestRoundTripTime*: cuint
     lastRoundTripTimeVariance*: cuint
@@ -407,6 +411,7 @@ type
     unsequencedWindow*: array[0..ENET_PEER_UNSEQUENCED_WINDOW_SIZE div 32 - 1, 
                               cuint]
     eventData*: cuint
+    totalWaitingData: csize
 
   PCompressor* = ptr TCompressor
   TCompressor*{.pure, final.} = object 
