@@ -253,6 +253,8 @@ const
   ENET_HOST_SEND_BUFFER_SIZE             = 256 * 1024
   ENET_HOST_BANDWIDTH_THROTTLE_INTERVAL  = 1000
   ENET_HOST_DEFAULT_MTU                  = 1400
+  ENET_HOST_DEFAULT_MAXIMUM_PACKET_SIZE  = 32 * 1024 * 1024
+  ENET_HOST_DEFAULT_MAXIMUM_WAITING_DATA = 32 * 1024 * 1024
 
   ENET_PEER_DEFAULT_ROUND_TRIP_TIME      = 500
   ENET_PEER_DEFAULT_PACKET_THROTTLE      = 32
@@ -425,6 +427,8 @@ type
 
   TChecksumCallback* = proc (buffers: ptr TEnetBuffer; bufferCount: csize): cuint{.
       cdecl.}
+
+  TInterceptCallback* = proc (host: ptr THost, event: ptr TEvent): cint{.cdecl.}
   
   PHost* = ptr THost
   THost*{.pure, final.} = object 
@@ -460,6 +464,12 @@ type
     totalSentPackets*: cuint
     totalReceivedData*: cuint
     totalReceivedPackets*: cuint
+    intercept*: TInterceptCallback
+    connectedPeers: csize
+    bandwidthLimitedPeers: csize
+    duplicatePeers: csize
+    maximumPacketSize: csize
+    maximumWaitingData: csize
   
   TEventType*{.size: sizeof(cint).} = enum 
     EvtNone = 0, EvtConnect = 1, 
