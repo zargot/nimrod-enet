@@ -659,7 +659,8 @@ proc queueOutgoingCommand*(peer: PPeer; command: ptr TEnetProtocol;
           packet: PPacket; offset: cuint; length: cushort): POutgoingCommand{.
   importc: "enet_peer_queue_outgoing_command".}
 proc queueIncomingCommand*(peer: PPeer; command: ptr TEnetProtocol; 
-                    packet: PPacket; fragmentCount: cuint): PIncomingCommand{.
+                    data: pointer; dataLength: csize,
+                    flags, fragmentCount: cuint): PIncomingCommand{.
   importc: "enet_peer_queue_incoming_command".}
 proc queueAcknowledgement*(peer: PPeer; command: ptr TEnetProtocol; 
                             sentTime: cushort): PAcknowledgement{.
