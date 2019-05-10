@@ -551,6 +551,10 @@ proc select*(socket: TEnetSocket; a3: ptr TENetSocketSet;
               a4: ptr TENetSocketSet; a5: cuint): cint{.
   importc: "enet_socketset_select".}
 
+proc setHostIP*(address: PAddress; hostName: cstring): cint{.
+  importc: "enet_address_set_host_ip".}
+proc setHostIP*(address: var TAddress; hostName: cstring): cint{.
+  importc: "enet_address_set_host_ip".}
 proc setHost*(address: PAddress; hostName: cstring): cint{.
   importc: "enet_address_set_host".}
 proc setHost*(address: var TAddress; hostName: cstring): cint{.
