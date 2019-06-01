@@ -34,7 +34,7 @@ const
   ENET_VERSION_MAJOR* = 1
   ENET_VERSION_MINOR* = 3
   ENET_VERSION_PATCH* = 3
-template ENET_VERSION_CREATE(major, minor, patch: expr): expr = 
+template ENET_VERSION_CREATE(major, minor, patch: untyped): untyped = 
   (((major) shl 16) or ((minor) shl 8) or (patch))
 
 const 
@@ -288,22 +288,22 @@ when defined(Linux):
       dataLength*: csize
     TENetSocketSet* = Tfd_set
   ## see if these are different on win32, if not then get rid of these
-  template ENET_HOST_TO_NET_16*(value: expr): expr = 
+  template ENET_HOST_TO_NET_16*(value: untyped): untyped = 
     (htons(value))
-  template ENET_HOST_TO_NET_32*(value: expr): expr = 
+  template ENET_HOST_TO_NET_32*(value: untyped): untyped = 
     (htonl(value))
-  template ENET_NET_TO_HOST_16*(value: expr): expr = 
+  template ENET_NET_TO_HOST_16*(value: untyped): untyped = 
     (ntohs(value))
-  template ENET_NET_TO_HOST_32*(value: expr): expr = 
+  template ENET_NET_TO_HOST_32*(value: untyped): untyped = 
     (ntohl(value))
 
-  template ENET_SOCKETSET_EMPTY*(sockset: expr): expr = 
+  template ENET_SOCKETSET_EMPTY*(sockset: untyped): untyped = 
     FD_ZERO(addr((sockset)))
-  template ENET_SOCKETSET_ADD*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_ADD*(sockset, socket: untyped): untyped = 
     FD_SET(socket, addr((sockset)))
-  template ENET_SOCKETSET_REMOVE*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_REMOVE*(sockset, socket: untyped): untyped = 
     FD_CLEAR(socket, addr((sockset)))
-  template ENET_SOCKETSET_CHECK*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_CHECK*(sockset, socket: untyped): untyped = 
     FD_ISSET(socket, addr((sockset)))
 
 elif defined(Windows):
@@ -317,23 +317,23 @@ elif defined(Windows):
       data*: pointer
     TENetSocketSet* = Tfd_set
 
-  template ENET_HOST_TO_NET_16*(value: expr): expr = 
+  template ENET_HOST_TO_NET_16*(value: untyped): untyped = 
     (htons(value))
-  template ENET_HOST_TO_NET_32*(value: expr): expr = 
+  template ENET_HOST_TO_NET_32*(value: untyped): untyped = 
     (htonl(value))
-  template ENET_NET_TO_HOST_16*(value: expr): expr = 
+  template ENET_NET_TO_HOST_16*(value: untyped): untyped = 
     (ntohs(value))
-  template ENET_NET_TO_HOST_32*(value: expr): expr = 
+  template ENET_NET_TO_HOST_32*(value: untyped): untyped = 
     (ntohl(value))
 
-  template ENET_SOCKETSET_EMPTY*(sockset: expr): expr = 
+  template ENET_SOCKETSET_EMPTY*(sockset: untyped): untyped = 
     FD_ZERO(addr((sockset)))
-  template ENET_SOCKETSET_ADD*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_ADD*(sockset, socket: untyped): untyped = 
     FD_SET(socket, addr((sockset)))
   # FD_CLR not found in winlean? 
-  template ENET_SOCKETSET_REMOVE*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_REMOVE*(sockset, socket: untyped): untyped = 
     FD_CLR(socket, addr((sockset)))
-  template ENET_SOCKETSET_CHECK*(sockset, socket: expr): expr = 
+  template ENET_SOCKETSET_CHECK*(sockset, socket: untyped): untyped = 
     FD_ISSET(socket, addr((sockset)))
 
 
@@ -584,7 +584,7 @@ proc createPacket*(data: string; flag: cint): PPacket {.
   inline.} = createPacket(data.cstring, data.len + 1, flag)
 
 from macros import nestList, newCall, `!`
-macro shallowPacket* (data: pointer; len: int; flags: set[TPacketFlag]): expr =
+macro shallowPacket* (data: pointer; len: int; flags: set[TPacketFlag]): untyped =
   let flags_n = nestList(!"or", flags)
   result = newCall("enet.createPacket", data, len, flags_n)
   
