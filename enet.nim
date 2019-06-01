@@ -685,7 +685,7 @@ proc protocolCommandSize*(commandNumber: cuchar): csize{.
 
 {.pop.}
 
-from hashes import `!$`, `!&`, THash, hash
-proc hash*(x: TAddress): THash {.nimcall, noSideEffect.} =
+from hashes import `!$`, `!&`, Hash, hash
+proc hash*(x: TAddress): Hash {.nimcall, noSideEffect.} =
   result = !$(hash(x.host.int32) !& hash(x.port.int16))
 
