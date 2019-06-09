@@ -550,6 +550,8 @@ proc destroy*(socket: TEnetSocket){.
 proc select*(socket: TEnetSocket; a3: ptr TENetSocketSet;
               a4: ptr TENetSocketSet; a5: cuint): cint{.
   importc: "enet_socketset_select".}
+proc getAddress*(socket: TEnetSocket; address: var TAddress): cint{.
+  importc: "enet_socket_get_address".}
 
 proc setHostIP*(address: PAddress; hostName: cstring): cint{.
   importc: "enet_address_set_host_ip".}
