@@ -500,6 +500,7 @@ proc initialize* : cint {.ic.}
 proc initialize* (version: TVersion; inits: ptr TEnetCallbacks): cint {.
   importc: "enet_initialize_with_callbacks".}
 proc deinitialize* {.ic.}
+proc linked_version* {.ic.}
 proc time_get*: cuint {.ic.}
 proc time_set* (time: cuint) {.ic.}
 
