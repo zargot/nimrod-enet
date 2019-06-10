@@ -95,6 +95,7 @@ type
     data*: cstring#ptr cuchar
     dataLength*: csize
     freeCallback*: TPacketFreeCallback
+    userData*: pointer
 
   PAcknowledgement* = ptr TAcknowledgement
   TAcknowledgement*{.pure, final.} = object
