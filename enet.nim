@@ -637,6 +637,8 @@ proc bandwidthLimit*(host: PHost; incoming, outgoing: cuint){.
   importc: "enet_host_bandwidth_limit".}
 proc bandwidthThrottle*(host: PHost){.
   importc: "enet_host_bandwidth_throttle".}
+proc randomSeed*(): cuint{.
+  importc: "enet_host_random_seed".}
 
 
 proc send*(peer: PPeer; channel: cuchar; packet: PPacket): cint{.
