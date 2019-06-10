@@ -47,7 +47,6 @@ type
   TSocketWait*{.size: sizeof(cint).} = enum
     ENET_SOCKET_WAIT_NONE = 0, ENET_SOCKET_WAIT_SEND = (1 shl 0),
     ENET_SOCKET_WAIT_RECEIVE = (1 shl 1)
-
   TSocketOption*{.size: sizeof(cint).} = enum
     ENET_SOCKOPT_NONBLOCK = 1,
     ENET_SOCKOPT_BROADCAST = 2,
