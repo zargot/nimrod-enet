@@ -548,6 +548,8 @@ proc wait*(socket: TEnetSocket; a3: ptr cuint; a4: cuint): cint{.
   importc: "enet_socket_wait".}
 proc setOption*(socket: TEnetSocket; a3: TSocketOption; a4: cint): cint{.
   importc: "enet_socket_set_option".}
+proc getOption*(socket: TEnetSocket; a3: TSocketOption; a4: ptr cint): cint{.
+  importc: "enet_socket_get_option".}
 proc destroy*(socket: TEnetSocket){.
   importc: "enet_socket_destroy".}
 proc select*(socket: TEnetSocket; a3: ptr TENetSocketSet;
