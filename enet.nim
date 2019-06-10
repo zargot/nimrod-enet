@@ -74,7 +74,8 @@ type
     FlagReliable = (1 shl 0),
     FlagUnsequenced = (1 shl 1),
     NoAllocate = (1 shl 2),
-    UnreliableFragment = (1 shl 3)
+    UnreliableFragment = (1 shl 3),
+    FlagSent = (1 shl 8)
 
   TENetListNode*{.pure, final.} = object
       next*: ptr T_ENetListNode
